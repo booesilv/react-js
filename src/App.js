@@ -1,4 +1,5 @@
 /* ROOT Component of your App  */
+//API KEY "ee15dcfd3d09460f9aa131739172402"
 
 import React, { Component } from 'react'
 import logo from './logo.svg'
@@ -16,12 +17,14 @@ import WeatherCard from './components/WeatherCard'
 
 class App extends Component {
 
-    /* React state initialization DOCUMENTATION : https://facebook.github.io/react/docs/react-without-es6.html#setting-the-initial-state */
+    /* React state initialization DOCUMENTATION : https
+    ://facebook.github.io/react/docs/react-without-es6.html#setting-the-initial-state */
 
     constructor( props ) {
         super( props )
         this.state = {
-            weather: undefined
+            weather: undefined,
+            city:'Paris',
         }
     }
 
@@ -42,6 +45,7 @@ class App extends Component {
                         <button onClick={ this.fetchWeather } className="waves-effect waves-light btn">
                             Weather?
                         </button>
+                        <input type="text" value={this.state.city}  onChange={this.handleleChange}/>
 
                     </div>
 
@@ -56,6 +60,13 @@ class App extends Component {
         )
     }
 
+handleleChange = ( event ) => {
+this.setState(
+    {
+        city : event.target.value
+    }
+)  
+}
 
     //method triggered by onClick event of the "Weather?" button
     /* Arrow function syntax used for Autobinding, see details here : https://facebook.github.io/react/docs/react-without-es6.html#autobinding */
@@ -66,14 +77,14 @@ class App extends Component {
         try {
             const weather = await get( ENDPOINTS.WEATHER_API_URL, {
                 //YOU NEED TO PROVIDE YOUR API KEY HERE
-                key: undefined,
-                q: 'Paris'
+                key: 'ee15dcfd3d09460f9aa131739172402',
+                q: this.state.city
             })
 
             /* React state DOCUMENTATION : https://facebook.github.io/react/docs/lifting-state-up.html */
 
             this.setState( {
-                weather
+                weather: weather
             })
         }
         catch ( error ) {

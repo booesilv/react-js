@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import picture from './img/paris.jpg'
+import picture from './img/561521bdf0aec.jpg'
+//import picture from './img/la-meteo-en-francais-francais-precoce.jpg'
 
 import './WeatherCard.css'
 
